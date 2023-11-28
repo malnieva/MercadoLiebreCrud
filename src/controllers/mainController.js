@@ -13,14 +13,14 @@ const controller = {
 		res.render('index.ejs', { inDiscount, visited })
 	},
 	search: (req, res) => {
-		const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
-		const palabra = (req.query.keywords);
-		//if (products.some(product => product.name === palabra )){
-
-			const pToSearch = products.find(product => product.name === palabra)
+		palabra = (req.query.keywords).trim();
+		let pFound = products.some(product => product.name.includes(palabra))
+		if (pFound){
+			const pToSearch = products.filter(product => product.name.includes(palabra));
 			console.log(pToSearch);
-			res.render('results.ejs', { pToSearch })
-
+			res.render('results.ejs', { pToSearch, palabra, pFound });
+		}// else{
+		//	console.log('llego un error');
 		//}
 	},
 };

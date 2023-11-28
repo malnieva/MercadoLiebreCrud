@@ -2,11 +2,20 @@
 const express = require('express');
 const router = express.Router();
 
-//var methodOverride = require('method-override')
+const path = require('path');
+const multer = require('multer');
 
-// override with POST having ?_method=DELETE
-//router.use(methodOverride('_method'))
+const storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, './public/images/products');
+	},
+	filename: (req, file, cb) => {
+		let fileName = `${Date.now()}_img${path.extname(file.originalname)}`;
+		cb(null, fileName);
+	}
+})
 
+const uploadFile = multer({ storage });
 
 // ************ Controller Require ************
 const productsController = require('../controllers/productsController');
@@ -19,7 +28,7 @@ router.get('/detail/:id/', productsController.detail);
 
 /*** CREATE ONE PRODUCT ***/ 
 router.get('/create', productsController.create); 
-router.post('/create', productsController.store); 
+router.post('/create', uploadFile.single('productImg'), productsController.store); 
 
 /*** EDIT ONE PRODUCT ***/ 
 router.get('/edit/:id', productsController.edit); 

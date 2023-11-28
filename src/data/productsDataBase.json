@@ -151,5 +151,14 @@
   "discount": "15",
   "category": "in-sale",
   "description": "zapatilla de marca"
+ },
+ {
+  "id": 18,
+  "image": "default-image.png",
+  "name": "Zapatillas Reebok",
+  "price": "30000",
+  "discount": "15",
+  "category": "in-sale",
+  "description": "fdsjfkds kfjsdk fds fkdslf sdfjdslkfjds"
  }
 ]
