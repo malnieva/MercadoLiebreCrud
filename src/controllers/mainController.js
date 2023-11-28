@@ -13,17 +13,15 @@ const controller = {
 		res.render('index.ejs', { inDiscount, visited })
 	},
 	search: (req, res) => {
-		//console.log(req.params.keywords);
+		const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+		const palabra = (req.query.keywords);
+		//if (products.some(product => product.name === palabra )){
 
-		if (products.some(product => product.name == 'cafetera')){
-			const pToEdit = products.find(product => product.id == req.params.id)
-			res.render('results.ejs', { pToEdit })
-			//res.render('product-edit-form.ejs', { pToEdit })
-		}
+			const pToSearch = products.find(product => product.name === palabra)
+			console.log(pToSearch);
+			res.render('results.ejs', { pToSearch })
 
-
-		//const found = products.filter(product => product.name === req.params.name)
-		//res.render('results.ejs')
+		//}
 	},
 };
 
