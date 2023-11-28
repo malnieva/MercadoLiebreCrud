@@ -13,15 +13,10 @@ const controller = {
 		res.render('index.ejs', { inDiscount, visited })
 	},
 	search: (req, res) => {
-		palabra = (req.query.keywords).trim();
-		let pFound = products.some(product => product.name.includes(palabra))
-		if (pFound){
-			const pToSearch = products.filter(product => product.name.includes(palabra));
-			console.log(pToSearch);
-			res.render('results.ejs', { pToSearch, palabra, pFound });
-		}// else{
-		//	console.log('llego un error');
-		//}
+		palabra = (req.query.keywords).toLowerCase();
+		const pFound = products.some(product => product.name.toLowerCase().includes(palabra))
+		const pToSearch = products.filter(product => product.name.toLowerCase().includes(palabra));
+		res.render('results.ejs', { pToSearch, palabra, pFound });
 	},
 };
 
