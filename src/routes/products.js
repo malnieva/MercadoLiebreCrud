@@ -1,21 +1,33 @@
 // ************ Require's ************
 const express = require('express');
 const router = express.Router();
+const { body } = require('express-validator');
 
 const path = require('path');
-const multer = require('multer');
 
-const storage = multer.diskStorage({
-	destination: (req, file, cb) => {
-		cb(null, './public/images/products');
-	},
-	filename: (req, file, cb) => {
-		let fileName = `${Date.now()}_img${path.extname(file.originalname)}`;
-		cb(null, fileName);
-	}
-})
+const uploadFile = require('../middlewares/multer');
 
-const uploadFile = multer({ storage });
+const validations = [
+    body('name').notEmpty().withMessage('Tiene que ingresar un nombre'),
+    body('price').notEmpty().withMessage('Tiene que ingresar un precio'),
+    body('discount').notEmpty().withMessage('Tiene que ingresar un descuento/0 para nada'),
+    body('category').notEmpty().withMessage('Tiene que seleccionar una categoria'),
+    body('description').notEmpty().withMessage('Tiene que ingresar una descripcion'),
+    body('productImg').custom((value, { req }) => {
+        let file = req.file;
+        //let acceptedExtensions = ['.jpg', '.png', '.gif'];
+        //let fileExtension = path.extname(file.originalname);
+
+        if (!file) {
+            throw new Error('Tienes que subir una imagen');
+        }
+
+        //if (!acceptedExtensions.includes(fileExtension)){
+        //    throw new Error(`Las extensiones de archivo permitidas son ${acceptedExtensions.join(', ')}`);
+        //}
+        //return true;
+    })
+]
 
 // ************ Controller Require ************
 const productsController = require('../controllers/productsController');
@@ -28,11 +40,11 @@ router.get('/detail/:id/', productsController.detail);
 
 /*** CREATE ONE PRODUCT ***/ 
 router.get('/create', productsController.create); 
-router.post('/create', uploadFile.single('productImg'), productsController.store); 
+router.post('/create', uploadFile.single('productImg'), validations, productsController.store); 
 
 /*** EDIT ONE PRODUCT ***/ 
 router.get('/edit/:id', productsController.edit); 
-router.put('/edit/:id', productsController.update); 
+router.put('/edit/:id', uploadFile.single('productImg'), productsController.update); 
 
 /*** DELETE ONE PRODUCT***/ 
 router.delete('/delete/:id', productsController.destroy); 

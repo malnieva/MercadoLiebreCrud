@@ -31,7 +31,8 @@
 					  />
 					</figure>
 					<article class="product-box_data">
-					  <h2>$ <%= product.price %></h2>
+            <% const precioFinal = product.price - (product.discount * product.price / 100)  %>
+					  <h2>$ <%= precioFinal %></h2>
 					  <span><%= product.discount %>% OFF</span>
 					  <p><%= product.name %></p>
 					  <i class="fas fa-truck"></i>

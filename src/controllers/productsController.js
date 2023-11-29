@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { validationResult } = require('express-validator');
 
 const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
 const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
@@ -27,10 +28,19 @@ const controller = {
 	
 	// Create -  Method to store
 	store: (req, res) => {
+		const resultValidations = validationResult(req);
+		if (resultValidations.errors.length > 0){
+			return res.render('product-create-form.ejs', {
+				errors : resultValidations.mapped(),
+				oldData : req.body
+			});
+		}
+		console.log(req.file); //para un solo archivo, para varios es req.files
 		const newProduct = {
 			//id: uuidv4(),  id unico uuid // npm install uuid
 			id : products.length + 1,
-			image: 'default-image.png',
+			image: req.file?.filename || 'default-image.png',
+			//image: 'default-image.png',
 			...req.body //spread operator // propagacion
 		}		
 		products.push(newProduct)
@@ -52,7 +62,7 @@ const controller = {
 		pToEdit.discount = req.body.discount || pToEdit.discount
 		pToEdit.category = req.body.category || pToEdit.category
 		pToEdit.description = req.body.description || pToEdit.description
-		pToEdit.image = req.body.image || pToEdit.image
+		pToEdit.image = req.file?.filename || pToEdit.image
 		fs.writeFileSync(productsFilePath, JSON.stringify(products, null, ' '))
 		res.redirect('/products')
 	},
