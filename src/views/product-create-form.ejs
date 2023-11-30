@@ -20,7 +20,7 @@
 					<div class="col-12 col-md-6">
 						<label for="name" class="form-label">Nombre del producto:</label>
 						<input type="text" id="name" name="name" placeholder="Ej: Zapatillas Reebok"
-							class="form-input <%= locals.errors && errors.name ? ' is-invalid' : null %>"
+							class="form-input <%= locals.errors && errors.name ? 'is-invalid' : null %>"
 							value="<% locals.oldData ? oldData.name : null %>" />
 						<% if (locals.errors && errors.name) { %>
 						<div class="form-label text-danger"><%= errors.name.msg %></div>
@@ -47,17 +47,11 @@
 						<select 
 							name="category" 
 							id="category"
-							class="form-input <%= locals.errors && errors.category ? ' is-invalid' : null %>">
+							class="form-input <%= locals.errors && errors.category ? 'is-invalid' : null %>">
 							<option value="">Elegí</option>
 							<% const categorias = [
-								{
-								valor : 'in-sale',
-								texto: 'En oferta'
-								},
-								{
-								valor: 'visited',
-								texto: 'Ultimos agregados'
-								}
+								{valor : 'in-sale', texto: 'En oferta'},
+								{valor: 'visited' , texto: 'Ultimos agregados'}
 							] %>
 							<% for (const categoria of categorias) { %>
 								<option 
@@ -83,14 +77,16 @@
 					</div>
 					<div class="col-12">
 						<div class="form-group">
-							<label for="image" class="form-label">Imagen de producto:</label>
-							<input type="file" name="productImg" class="form-control" />
-							</div>
-							<% if (locals.errors && errors.productImg) { %>
-							<div class="form-label text-danger">
-								<%= errors.productImg.msg %>
-							</div>
-							<% } %>
+							<div>
+								<label for="image" class="form-label">Imagen de producto:</label>
+								<input type="file" name="productImg" class="form-control" />
+								</div>
+								<% if (locals.errors && errors.productImg) { %>
+									<div class="form-label text-danger">
+										<%= errors.productImg.msg %>
+										</div>
+										<% } %>
+										</div>
 					</div>
 					<div class="col-12">
 						<button type="submit" class="buy-now-button">
