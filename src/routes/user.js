@@ -26,7 +26,7 @@ const validations = [
 ]
 
 // ************ Controller Require ************
-const productsController = require('../controllers/usersController');
+const usersController = require('../controllers/usersController');
 
 /*** GET ONE USER ***/ 
 router.get('/login/:id/', usersController.login); 
