@@ -52,6 +52,9 @@ const controller = {
 		const users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
 		const pToEdit = users.find(user => user.id == req.params.id)
 		pToEdit.name = req.body.name || pToEdit.name
+		pToEdit.username = req.body.username || pToEdit.username
+		pToEdit.email = req.body.email || pToEdit.email
+
 		pToEdit.price = req.body.price || pToEdit.price
 		pToEdit.discount = req.body.discount || pToEdit.discount
 		pToEdit.category = req.body.category || pToEdit.category
@@ -63,8 +66,11 @@ const controller = {
 
 	// Delete - Delete one user from DB
 	destroy : (req, res) => {
-		const pToDelete = users.filter(user => user.id != req.params.id)
+		const id = req.params.id
+		userToDelete = user.find(user => user.id == id)
+		const pToDelete = users.filter(user => user.id != id)
 		fs.writeFileSync(usersFilePath, JSON.stringify(pToDelete, null, ' '))
+		fs.unlinkSync(path.join(__dirname, '../../public/images/', userToDelete.image))
 		res.redirect('/login')
 	}
 };

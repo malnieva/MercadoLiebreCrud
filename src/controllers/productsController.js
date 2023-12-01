@@ -69,8 +69,11 @@ const controller = {
 
 	// Delete - Delete one product from DB
 	destroy : (req, res) => {
+		const id = req.params.id
+		productToDelete = product.find(product => product.id == id)
 		const pToDelete = products.filter(product => product.id != req.params.id)
 		fs.writeFileSync(productsFilePath, JSON.stringify(pToDelete, null, ' '))
+		fs.unlinkSync(path.join(__dirname, '../../public/images/', productToDelete.image))
 		res.redirect('/products')
 	}
 };

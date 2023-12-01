@@ -1,0 +1,450 @@
+* {
+  font-family: "Roboto", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+/*Colores a usar:
+  Amarillo: #EAC926;
+  Azul: #03264C;
+  Celeste: #1259c3;
+  Gris oscuro: #666;
+  Gris claro: #ebebeb;
+  Verde: #39b54a;
+
+  Para la sección del Header debemos:
+  1 - Solo para la versión mobile, ocultar el site y el login navbar.
+  2 - Para la version desktop y tablet se debe mostrar el site y login navbar, 
+      pero ocultar la imagen del menú hamburguesa.
+  */
+
+/* header */
+header {
+  background-color: #eac926;
+  padding-bottom: 15px;
+}
+/*logo AND box__search */
+#box__logo__search {
+  display: flex;
+  align-items: center;
+  width: 100vw;
+}
+#logo {
+  width: 50vw;
+}
+#logo img {
+  width: 80%;
+  padding: 10px;
+  cursor: pointer;
+}
+/*search*/
+#box__search {
+  width: 50vw;
+  display: flex;
+  justify-content: flex-start;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+.search {
+  border: none;
+  width: 90%;
+  padding: 3px;
+  font-size: 12px;
+  outline: none;
+}
+.button__lupa {
+  background-color: transparent;
+  border: none;
+  margin-left: 5px;
+}
+#tdc {
+  display: flex;
+  justify-content: center;
+}
+#tdc p {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+#tdc i {
+  margin: 0 10px;
+}
+/*navBar*/
+nav {
+  display: none;
+}
+/*boton hamburguesa*/
+.burger__menu {
+  display: block;
+  margin: auto;
+  font-size: 20px;
+  padding: 4px 10px;
+  background-color: #03264c;
+  border-radius: 5px;
+  color: white;
+  border: none;
+}
+/*   1- Navegación en tablets (ancho mínimo 361 px)
+     2- Navegación en desktop (ancho mínimo 769 px)
+     3- Solo para el caso mobile la descripción del artículo no se visualizará.
+     4- Agregar box-shadow. Para los dispositivos tablet o de resoluciones superiores, 
+        para ello nos pasaron esta propiedad* con los valores de CSS correspondientes:
+        box-shadow: 0px 0px 10px rgb(100, 100, 100);
+  */
+/*__________ M A I N   I N D E X __________*/
+main {
+  background-color: #ebebeb;
+  padding-bottom: 25px;
+  /*width: 90%;*/
+  margin: auto;
+}
+/*banner*/
+#banner {
+  width: 100%;
+}
+#banner img {
+  width: 100%;
+}
+/* titulos basado en ultima visita y ofertas */
+section h3 {
+  color: #666;
+  font-size: 24px;
+  text-align: center;
+  padding: 40px 0;
+}
+/*truck*/
+.fa-truck,
+.oferta {
+  color: #39b54a;
+}
+#figcaption {
+  font-size: 18px;
+  width: 30%;
+}
+.oferta {
+  margin-left: 15px;
+  font-size: 16px;
+  width: 70%;
+}
+.fa-truck {
+  padding: 8px;
+  border: 1px #39b54a solid;
+  border-radius: 100%;
+}
+.truck {
+  display: flex;
+  justify-content: end;
+}
+.card__product {
+  margin-bottom: 10px;
+}
+.product {
+  display: flex;
+  justify-content: center;
+}
+.product img {
+  width: 100%;
+  padding: 0 15px;
+}
+.box__info {
+  display: inline-flex;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.info {
+  background-color: white;
+  margin: 0 15px;
+  padding: 15px;
+  border-top: 1px solid #ebebeb;
+}
+.description {
+  display: none;
+  font-size: 16px;
+}
+/*___________ M A I N   F O R M U L A R I O S ///REGISTER AND LOGIN//// ___________*/
+/*estilos grales que se usaron para los form de los dos html, register and login*/
+.forms__container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 50px;
+  width: 100%;
+}
+fieldset {
+  border: none;
+  margin-bottom: 20px;
+}
+#data__interests legend,
+fieldset legend,
+#password label,
+.data__persona label {
+  font-weight: bold;
+  margin: 0 0 10px 5px;
+}
+/* TODOS LOS INPUT */
+.data__persona input,
+#password input {
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  outline-color: #eac926;
+}
+/* datos personales y contraseña */
+.data__persona,
+#password {
+  display: flex;
+  flex-direction: column;
+}
+/* datos de intereses */
+#data__interests article {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+/*mismos estilos a los input de datos de usuarios, foto de usuario y de datos de intereses*/
+#data__interests input,
+#data__user input,
+#photo-username {
+  margin: 0 30px;
+}
+/* BOTONES */
+.forms__container a {
+  text-decoration: none;
+}
+.forms__container button {
+  background-color: #03264c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: all 450ms;
+}
+button:hover {
+  background-color: #0022AA;
+}
+/*para centrar el texto de inicia sesion*/
+.data__sesion legend {
+  text-align: center;
+}
+/* footer */
+footer {
+  background-color: white;
+  padding: 40px 20px 10px;
+}
+.fa-credit-card,
+.fa-gift,
+.fa-user-shield {
+  color: #03264c;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+article h4,
+.info__footer,
+h6 {
+  color: #666;
+  text-align: center;
+  margin: 3px;
+}
+h6 {
+  font-weight: lighter;
+}
+.info__footer {
+  margin-bottom: 45px;
+}
+
+@media (min-width: 769px) {
+  /* header - logo - search - cuotas */
+  .header__container {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    padding-bottom: 10px;
+  }
+  #box__logo__search {
+    width: 70vw;
+  }
+  #logo img {
+    width: 90%;
+    padding: 10px;
+  }
+  .search {
+    width: 80%;
+    font-size: 0.9rem;
+  }
+  #tdc p {
+    font-size: 0.9rem;
+  }
+  .button__lupa {
+    margin-left: 30px;
+  }
+  #tdc {
+    width: 30vw;
+    align-items: center;
+    justify-content: center;
+  }
+  /*navBar*/
+  nav {
+    display: flex;
+    justify-content: space-between;
+  }
+  li a {
+    text-decoration: none;
+    color: black;
+    background: linear-gradient(currentColor, currentColor);
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    transition: all 0.5s;
+  }
+  nav ul li a:hover{
+    color: #0022AA;
+    background-size: 100% 2px;
+  }
+  ul {
+    list-style: none;
+    display: flex;
+    align-self: center;
+  }
+  ul li {
+    padding: 5px;
+  }
+  /*boton hamburguesa*/
+  .burger__menu {
+    display: none;
+  }
+  /*___________ M A I N   I N D E X ____________*/
+  .products__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .card__product {
+    width: 45%;
+    margin: 15px;
+    box-shadow: none;
+    transition: all 1s;
+  }
+  .card__product:hover {
+    box-shadow: 0px 0px 10px rgb(100, 100, 100);
+  }
+  .card__product:hover .description{
+    display: initial;
+  }
+  .fa-truck:hover {
+    animation: girar 1s 1;
+  }
+  @keyframes girar {
+    0% {
+    transform: rotate(-90deg);
+    }
+  }
+  #figcaption {
+    width: 50%;
+  }
+  .oferta {
+    width: 50%;
+  }
+  .product img {
+    padding: 0;
+  }
+  .info {
+    background-color: white;
+    margin: 0;
+    padding: 15px;
+  }
+  /*main formularios*/
+  .box__forms {
+    width: 100vw;
+    padding: 0 30px;
+  }
+  /*footer*/
+  footer section {
+    display: flex;
+    justify-content: space-around;
+  }
+  .article__footer {
+    margin: 20px;
+  }
+  h4 {
+    font-size: 1.2rem;
+  }
+  .info__footer {
+    font-size: 1rem;
+  }
+  footer i {
+    font-size: 2em;
+    margin-bottom: 10px;
+    transition: 475ms;
+  }
+   footer i:hover {
+    color: #e2d523;
+  }
+}
+
+@media (min-width: 1200px) {
+  /* header - logo - search - cuotas */
+  .header__container {
+    display: flex;
+    justify-items: center;
+  }
+  .search {
+    width: 100%;
+    padding: 4px;
+  }
+  #tdc p {
+    font-size: 1rem;
+  }
+  .button__lupa {
+    margin-right: 15px;
+  }
+  /*navBar*/
+  ul li {
+    padding: 20px;
+  }
+  /*___________ M A I N   I N D E X ___________*/
+  .products__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .card__product {
+    width: 22%;
+  }
+  #figcaption {
+    width: 50%;
+  }
+  .description {
+    display: none;
+  }
+  .oferta {
+    width: 50%;
+  }
+  /*___________ main formularios ____________*/
+  /*main formularios*/
+  .box__forms {
+    padding: 0 300px;
+  }
+  .card__btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .card__btn button {
+    width: 300px;
+  }
+  .card__btn #reset {
+    margin-left: 30px;
+  }
+  /*centrar el boton de enviar de inicia sesion*/
+  .btn--enviar {
+    justify-content: center;
+  }
+}
+
