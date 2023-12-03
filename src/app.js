@@ -1,6 +1,7 @@
 // ************ Require's ************
 const createError = require('http-errors');
-const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const cookies = require('cookie-parser');
 const express = require('express');
 const logger = require('morgan');
 const path = require('path');
@@ -14,7 +15,7 @@ app.use(express.static(path.join(__dirname, '../public')));  // Necesario para l
 app.use(express.urlencoded({ extended: false }));
 app.use(logger('dev'));
 app.use(express.json());
-app.use(cookieParser());
+app.use(cookies());
 app.use(methodOverride('_method')); // Pasar poder pisar el method="POST" en el formulario por PUT y DELETE
 
 // ************ Template Engine - (don't touch) ************
@@ -22,16 +23,27 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views')); // Define la ubicación de la carpeta de las Vistas
 
 
+const userLoggedMiddleware = require('./middlewares/userLoggedMiddleware');
+
+app.use(session({
+	secret: "Shhh, It's a secret",
+	resave: false,
+	saveUninitialized: false,
+}));
+
+app.use(cookies());
+
+app.use(userLoggedMiddleware);
 
 // ************ WRITE YOUR CODE FROM HERE ************
 // ************ Route System require and use() ************
-const mainRouter = require('./routes/main'); // Rutas main
-const productsRouter = require('./routes/products'); // Rutas /products
-const usersRouter = require('./routes/users'); // Rutas /users
+const mainRoutes = require('./routes/main'); // Rutas main
+const productsRoutes = require('./routes/products'); // Rutas /products
+const userRoutes = require('./routes/users'); // Rutas /users
 
-app.use('/', mainRouter);
-app.use('/products', productsRouter);
-app.use('/users', usersRouter);
+app.use('/', mainRoutes);
+app.use('/products', productsRoutes);
+app.use('/users', userRoutes);
 
 
 
@@ -53,3 +65,39 @@ app.use((err, req, res, next) => {
 
 // ************ exports app - dont'touch ************
 module.exports = app;
+
+
+/*const express = require('express');
+const session = require('express-session');
+const cookies = require('cookie-parser');
+
+const app = express();
+
+const userLoggedMiddleware = require('./middlewares/userLoggedMiddleware');
+
+app.use(session({
+	secret: "Shhh, It's a secret",
+	resave: false,
+	saveUninitialized: false,
+}));
+
+app.use(cookies());
+
+app.use(userLoggedMiddleware);
+
+app.use(express.urlencoded({ extended: false }));
+
+app.use(express.static('../public'));
+app.listen(3000, () => console.log('Servidor levantado en el puerto 3000'));
+
+// Template Engine
+app.set('view engine', 'ejs');
+
+// Routers
+const mainRoutes = require('./routes/main'); // Rutas main
+const productsRoutes = require('./routes/products'); // Rutas /products
+const userRoutes = require('./routes/users'); // Rutas /users
+
+app.use('/', mainRoutes);
+app.use('/products', productsRoutes);
+app.use('/users', userRoutes);*/

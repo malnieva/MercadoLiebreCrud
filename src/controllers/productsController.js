@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { validationResult } = require('express-validator');
+const { log } = require('console');
 
 const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
 const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
@@ -35,7 +36,7 @@ const controller = {
 				oldData : req.body
 			});
 		}
-		console.log(req.file); //para un solo archivo, para varios es req.files
+		//console.log(req.file); //para un solo archivo, para varios es req.files
 		const newProduct = {
 			//id: uuidv4(),  id unico uuid // npm install uuid
 			id : products.length + 1,
@@ -70,10 +71,10 @@ const controller = {
 	// Delete - Delete one product from DB
 	destroy : (req, res) => {
 		const id = req.params.id
-		productToDelete = product.find(product => product.id == id)
+		productToDelete = products.find(product => product.id == id)
 		const pToDelete = products.filter(product => product.id != req.params.id)
 		fs.writeFileSync(productsFilePath, JSON.stringify(pToDelete, null, ' '))
-		fs.unlinkSync(path.join(__dirname, '../../public/images/', productToDelete.image))
+		fs.unlinkSync(path.join(__dirname, '../../public/images/products', productToDelete.image))
 		res.redirect('/products')
 	}
 };

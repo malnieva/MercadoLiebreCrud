@@ -5,7 +5,7 @@ const { body } = require('express-validator');
 
 const path = require('path');
 
-const uploadFile = require('../middlewares/multer');
+const uploadFile = require('../middlewares/multerProduct');
 
 const validations = [
     body('name').notEmpty().withMessage('Tiene que ingresar un nombre'),
